@@ -20,7 +20,7 @@ What is an Homogenous Collection
 Usually a database result set, stored as list of objects where all of them contains the same amount of keys with identical name.
 This is a basic homogeneous collection example: `[{"a":"A","b":"B"},{"a":"C","b":"D"},{"a":"E","b":"F"}]`
 We all have exchange over the network one or more homogenous collections at least once.
-JSONH is able to pack the example into `[2,"a","b","A","B","C","D","E"]` and unpack it into original collection at light speed.
+JSONH is able to pack the example into `[2,"a","b","A","B","C","D","E","F"]` and unpack it into original collection at light speed.
 
 
 JSONH is suitable for
