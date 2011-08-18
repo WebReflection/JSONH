@@ -37,28 +37,27 @@ Every implementation is suitable for the programming language code style and eve
 As example the JavaScript version is a global `JSONH` object with `stringify`, `parse`, `pack`, and `unpack` methods.
 
 The python version is a module similar to `json` one with current methods: `dump`, `dumps`, `load`, `loads`, `pack`, and `unpack`.
-`
-import jsonh
 
-print(jsonh.dumps(
-    [{"a": "A", "b": "B"}, {"a": "C", "b": "D"}, {"a": "E", "b": "F"}],
-    separator = (',',':')
-))
-`
+    import jsonh
+    
+    print(jsonh.dumps(
+        [{"a": "A", "b": "B"}, {"a": "C", "b": "D"}, {"a": "E", "b": "F"}],
+        separator = (',',':')
+    ))
+
 
 The php 5 version is a static class plus some function in order to let developers decide for their favorite stile.
 Extra arguments accepted by `json_encode` and `json_decode` are supported as well.
-`
 
-require_once('JSONH.class.php');
+    require_once('JSONH.class.php');
+    
+    // classic style
+    jsonh_encode($object); // jsonh_decode($object)
+    
+    // static public stype
+    JSONH::stringify($object); // JSONH::parse($object);
+    
+    // singleton style
+    JSONH()->stringify($object); // JSONH()->parse($object)
+    
 
-// classic style
-jsonh_encode($object); // jsonh_decode($object)
-
-// static public stype
-JSONH::stringify($object); // JSONH::parse($object);
-
-// singleton style
-JSONH()->stringify($object); // JSONH()->parse($object)
-
-`
