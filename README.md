@@ -30,6 +30,9 @@ JSONH is suitable for
  * creation of static JavaScript files to serve in order to save space on Hard Drive and eventually make runtime gzip/deflate compression easier (smaller input)
  * send huge collection of data from the client to the server and improving performances over `JSON.stringify(data)` and required network bandwidth
 
+If the generic object/data contains one or more homogenous collections, JSONH is suitable for these cases too via `pack` and `unpack` operations.
+Please read the [related post](http://webreflection.blogspot.com/2011/08/jsonh-and-hybrid-js-objects.html) to know more.
+
 
 JSONH API
 ---------
