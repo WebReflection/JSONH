@@ -70,7 +70,7 @@ TODO
 
  * clean up locally tests and use a standard one able to cover all aspects per each implementation
  * C# version, and hopefully with other developers help other languages too
- * simplified yet cross platform way to *map* hybrid objects, specifying via white list one or more nested properties to `pack` on stringify, and `unpack` on parse
+ * simplified yet cross platform way to *map* hybrid objects, specifying via white list one or more nested properties to `pack` on stringify, and `unpack` on parse (automated and addressed compression for complex objects)
 
 JavaScript And Native JSON Escape Problems
 ------------------------------------------
