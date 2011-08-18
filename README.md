@@ -64,3 +64,16 @@ Extra arguments accepted by `json_encode` and `json_decode` are supported as wel
     JSONH()->stringify($object); // JSONH()->parse($object)
     
 
+
+Native JS JSON Escape Problems
+------------------------------
+As [@garethheyes](https://twitter.com/garethheyes) pointed out by in [this post](http://www.thespanner.co.uk/2011/07/25/the-json-specification-is-now-wrong/), native `JSON.stringify(data)` may produce invalid JavaScript.
+Since JSONH aim is *not* to change native JSON behavior, neither is JSONH a replacement for JSON, all I can suggest is to perform this replacement when and if data could be corrupted:
+
+    JSONH.stringify(output).replace(
+        /\u2028|\u2029/g,
+        function (m) {
+            return "\\u202" + (m === "\u2028" ? "8" : "9");
+        })
+
+This will ensure proper escape for those characters plus performances will be still better thanks to reduced string output size.
