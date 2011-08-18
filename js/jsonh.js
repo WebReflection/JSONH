@@ -58,13 +58,13 @@ var JSONH = function () { // "use strict"; // if you want
         },
         
         // JSONH.unpack after JSON.parse
-        parse: function parse(hlist) {
-            return JSONH.unpack(JSON.parse(hlist));
+        parse: function parse(hlist, reviver) {
+            return JSONH.unpack(JSON.parse(hlist, reviver));
         },
         
         // JSON.stringify after JSONH.pack
-        stringify: function stringify(list) {
-            return JSON.stringify(JSONH.pack(list));
+        stringify: function stringify(list, replacer, space) {
+            return JSON.stringify(JSONH.pack(list), replacer, space);
         },
         
         // transforms [1,"a","A","B"] to [{a:"A"},{a:"B"}]
