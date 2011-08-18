@@ -1,4 +1,4 @@
-var JSONHF = function () { // "use strict"; // if you want
+var JSONH = function () { // "use strict"; // if you want
     
     /**
      * Copyright (C) 2011 by Andrea Giammarchi, @WebReflection
