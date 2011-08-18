@@ -57,7 +57,7 @@ Extra arguments accepted by `json_encode` and `json_decode` are supported as wel
     // classic style
     jsonh_encode($object); // jsonh_decode($str)
     
-    // static public stype
+    // static public style
     JSONH::stringify($object); // JSONH::parse($str);
     
     // singleton style
