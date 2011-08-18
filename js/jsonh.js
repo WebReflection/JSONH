@@ -1,4 +1,4 @@
-var JSONH = function () { // "use strict"; // if you want
+var JSONHF = function () { // "use strict"; // if you want
     
     /**
      * Copyright (C) 2011 by Andrea Giammarchi, @WebReflection
@@ -33,7 +33,7 @@ var JSONH = function () { // "use strict"; // if you want
     ;
     return JSONH = {
         
-        // transforms [{a:"A"},{a:"B"}] to [["a"],"A","B"]
+        // transforms [{a:"A"},{a:"B"}] to [1,"a","A","B"]
         pack: function pack(list) {
             for (var
                 length = list.length,
@@ -53,8 +53,8 @@ var JSONH = function () { // "use strict"; // if you want
                     result[j++] = o[keys[ki++]]
                 );
             }
-            // stack of properties as index 0, rest after
-            return [keys].concat(result);
+            // keys.length, keys, result
+            return [klength].concat(keys, result);
         },
         
         // JSONH.unpack after JSON.parse
@@ -67,14 +67,13 @@ var JSONH = function () { // "use strict"; // if you want
             return JSON.stringify(JSONH.pack(list));
         },
         
-        // transforms [["a"],"A","B"] to [{a:"A"},{a:"B"}]
+        // transforms [1,"a","A","B"] to [{a:"A"},{a:"B"}]
         unpack : function unpack(hlist) {
             for (var
                 length = hlist.length,
-                keys = hlist[0],
-                klength = keys.length,
-                result = Array(((length - 1) / klength) || 0),
-                i = 1,
+                klength = hlist[0],
+                result = Array(((length - klength - 1) / klength) || 0),
+                i = 1 + klength,
                 j = 0,
                 ki, o;
                 i < length;
@@ -82,7 +81,7 @@ var JSONH = function () { // "use strict"; // if you want
                 for (
                     result[j++] = (o = {}), ki = 0;
                     ki < klength;
-                    o[keys[ki++]] = hlist[i++]
+                    o[hlist[++ki]] = hlist[i++]
                 );
             }
             return result;
