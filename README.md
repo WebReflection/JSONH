@@ -55,13 +55,13 @@ Extra arguments accepted by `json_encode` and `json_decode` are supported as wel
     require_once('JSONH.class.php');
     
     // classic style
-    jsonh_encode($object); // jsonh_decode($object)
+    jsonh_encode($object); // jsonh_decode($str)
     
     // static public stype
-    JSONH::stringify($object); // JSONH::parse($object);
+    JSONH::stringify($object); // JSONH::parse($str);
     
     // singleton style
-    JSONH()->stringify($object); // JSONH()->parse($object)
+    JSONH()->stringify($object); // JSONH()->parse($str)
     
 
 
