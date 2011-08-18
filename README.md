@@ -65,6 +65,13 @@ Extra arguments accepted by `json_encode` and `json_decode` are supported as wel
     
 
 
+TODO
+----
+
+ * clean up locally tests and use a standard one able to cover all aspects per each implementation
+ * C# version, and hopefully with other developers help other languages too
+ * simplified yet cross platform way to *map* hybrid objects, specifying via white list one or more nested properties to `pack` on stringify, and `unpack` on parse
+
 JavaScript And Native JSON Escape Problems
 ------------------------------------------
 As [@garethheyes](https://twitter.com/garethheyes) pointed out by in [this post](http://www.thespanner.co.uk/2011/07/25/the-json-specification-is-now-wrong/), native `JSON.stringify(data)` may produce invalid JavaScript.
