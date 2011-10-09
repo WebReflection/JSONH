@@ -89,3 +89,11 @@ var JSONH = function () { // "use strict"; // if you want
     };
     
 }();
+
+
+//node.js?
+if(typeof module != 'undefined' &&
+!!module.exports)
+{
+	module.exports = JSONH;
+}
