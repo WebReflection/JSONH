@@ -13,6 +13,11 @@ It is also demonstrated that resulting bandwidth size will be incrementally smal
 
 JSONH is the latest version of [json.hpack](https://github.com/WebReflection/json.hpack) project and based on [JSONDB concept](http://michaux.ca/articles/json-db-a-compressed-json-format).
 
+New in version 0.0.2 ( JS only )
+--------------------------------
+ * added experimental and optional `schema` argument at the end of all methods in order to parse automatically one or more nested homogenous collections
+ * covered via unit tests pack/unpack with or without the usage of a schema
+
 
 What is an Homogenous Collection
 --------------------------------
