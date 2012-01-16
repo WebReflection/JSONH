@@ -1,6 +1,4 @@
-require 'json'
-
-"""
+=begin
 Copyright (C) 2011
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,48 +18,55 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-"""
+=end
 
-def dump(obj)
-	return json.dump(pack(obj))
+require 'json'
+
+module JSONH
+  module_function
+
+  def dump(obj)
+    pack(obj).to_json
+  end
+
+  def load(str)
+    unpack(JSON.load(str))
+  end
+
+  def pack(hlist)
+    keys = hlist.first.keys
+    [keys.size, *keys, *hlist.map(&:values).flatten(1)]
+  end
+
+  def unpack(hlist)
+    ksize = Integer(hlist[0])
+    keys = hlist[1, ksize]
+    values = hlist[ksize+1..-1]
+    values.each_slice(ksize).map do |values|
+      Hash[keys.zip(values)]
+    end
+  end
 end
 
-def load(str)
-	return unpack(json.load(str))
-end
+if $0 == __FILE__
+  require 'bacon'
+  Bacon.summary_on_exit
 
-def pack(hl)
-	length = hl.length
-	keys = length && hl.key(0) || []
-	klength = keys.length
-	result = []
-	i = 0
-	while i < length
-	  o = hl[i]
-	  ki = 0
-	  while ki < klength
-	    result.push(o[keys[ki]])
-	    ki += 1
-	  end
-	  i += 1
-	end
-	return [klength] + keys + result
-end
+  describe JSONH do
+    collection = [
+      {'a' => 'A', 'b' => 'B'},
+      {'a' => 'C', 'b' => 'D'},
+      {'a' => 'E', 'b' => 'F'}
+    ]
 
-def unpack(hlist)
-	length = hlist.length
-	klength = hlist[0]
-	result = []
-	i = 1 + klength
-	while i < length
-	  o = Hash.new
-	  ki = 0
-	  while ki < klength
-	    ki += 1
-	    o[hlist[ki]] = hlist[i]
-	    i += 1
-	  end
-	  result.push(o)
-	end
-	return result
+    json = %([2,"a","b","A","B","C","D","E","F"])
+
+    it 'dumps homogenous collections' do
+      JSONH.dump(collection).should == json
+    end
+
+    it 'loads homogenous collections' do
+      JSONH.load(json).should == collection
+    end
+  end
 end
