@@ -80,7 +80,7 @@ var JSONH, jsonh = JSONH = function (Array, JSON) {"use strict"; // if you want
                 if (isArray(tmp = current[k = path[i]])) {
                     j = i + 1;
                     current[k] = j < length ?
-                        map.call(tmp, through, path.slice(j)) :
+                        map.call(tmp, method, path.slice(j)) :
                         method(tmp)
                     ;
                 }
