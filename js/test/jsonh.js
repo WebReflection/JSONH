@@ -6,6 +6,16 @@ var jsonh = require("../jsonh");
 // enojy your tests!
 wru.test([
     {
+        name: "nested array and schema",
+        test: function () {
+            var
+                object = [{a:[[{b:12}]]}],
+                initial = JSON.stringify(object),
+                schema = ['a.c']
+            ;
+            assert("back to normal", initial === JSON.stringify(jsonh.parse(jsonh.stringify(object, null, null, schema), null, schema)));
+        }
+    }, {
         name: "require did not fail",
         test: function () {
             assert("jsonh is an object", typeof jsonh == "object");
