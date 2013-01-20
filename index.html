@@ -1,0 +1,145 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Jsonh</title>
+  <meta name="description" content="Homogeneous Collection Compressor">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Jsonh</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">Homogeneous Collection Compressor</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/WebReflection/JSONH/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/WebReflection/JSONH/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/WebReflection/JSONH" class="code">View Jsonh on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>
+<a href="http://webreflection.blogspot.com/2011/08/last-version-of-json-hpack.html">JSONH</a> - JSON Homogeneous Collections Compressor</h1>
+
+<h2>What is JSONH</h2>
+
+<p>JSONH is one of the most performant, yet safe, cross programming language, way to pack and unpack generic homogenous collections.
+Based on native or shimmed JSON implementation, JSONH is nothing different than a procedure performed right before <code>JSON.stringify(data)</code> or right after <code>JSON.parse(data)</code></p>
+
+<p><a href="http://jsperf.com/jsonh/2">It is demonstrated</a> that overall performances of JSONH are up to 3 times faster in compression and 2 times in parsing thanks to smaller and simplified nature of the collection/string.</p>
+
+<p>It is also demonstrated that resulting bandwidth size will be incrementally smaller than equivalent JSON operation reaching, in certain cases, down to 30% of original size and without gzip/deflate compression in place.</p>
+
+<p>JSONH is the latest version of <a href="https://github.com/WebReflection/json.hpack">json.hpack</a> project and based on <a href="http://michaux.ca/articles/json-db-a-compressed-json-format">JSONDB concept</a>.</p>
+
+<h2>New in version 0.0.2 ( JS only )</h2>
+
+<ul>
+<li>added experimental and optional <code>schema</code> argument at the end of all methods in order to parse automatically one or more nested homogenous collections</li>
+<li>covered via unit tests pack/unpack with or without the usage of a schema</li>
+</ul><h2>What is an Homogenous Collection</h2>
+
+<p>Usually a database result set, stored as list of objects where all of them contains the same amount of keys with identical name.
+This is a basic homogeneous collection example: <code>[{"a":"A","b":"B"},{"a":"C","b":"D"},{"a":"E","b":"F"}]</code>
+We all have exchange over the network one or more homogenous collections at least once.
+JSONH is able to pack the example into <code>[2,"a","b","A","B","C","D","E","F"]</code> and unpack it into original collection at light speed.</p>
+
+<h2>JSONH is suitable for</h2>
+
+<ul>
+<li>runtime data compression with or without gzip/deflate on both client and server side</li>
+<li>creation of static JavaScript files to serve in order to save space on Hard Drive and eventually make runtime gzip/deflate compression easier (smaller input)</li>
+<li>send huge collection of data from the client to the server and improving performances over <code>JSON.stringify(data)</code> and required network bandwidth</li>
+</ul><p>If the generic object/data contains one or more homogenous collections, JSONH is suitable for these cases too via <code>pack</code> and <code>unpack</code> operations.
+Please read the <a href="http://webreflection.blogspot.com/2011/08/jsonh-and-hybrid-js-objects.html">related post</a> to know more.</p>
+
+<h2>JSONH API</h2>
+
+<p>Every implementation is suitable for the programming language code style and every method supports original JSON signature.
+As example the JavaScript version is a global <code>JSONH</code> object with <code>stringify</code>, <code>parse</code>, <code>pack</code>, and <code>unpack</code> methods.</p>
+
+<p>The python version is a module similar to <code>json</code> one with current methods: <code>dump</code>, <code>dumps</code>, <code>load</code>, <code>loads</code>, <code>pack</code>, and <code>unpack</code>.</p>
+
+<pre><code>import jsonh
+
+print(jsonh.dumps(
+    [{"a": "A", "b": "B"}, {"a": "C", "b": "D"}, {"a": "E", "b": "F"}],
+    separator = (',',':')
+))
+</code></pre>
+
+<p>The php 5 version is a static class plus some function in order to let developers decide for their favorite stile.
+Extra arguments accepted by <code>json_encode</code> and <code>json_decode</code> are supported as well.</p>
+
+<pre><code>require_once('JSONH.class.php');
+
+// classic style
+jsonh_encode($object); // jsonh_decode($str)
+
+// static public style
+JSONH::stringify($object); // JSONH::parse($str);
+
+// singleton style
+JSONH()-&gt;stringify($object); // JSONH()-&gt;parse($str)
+</code></pre>
+
+<h2>TODO</h2>
+
+<ul>
+<li>clean up locally tests and use a standard one able to cover all aspects per each implementation</li>
+<li>C# version, and hopefully with other developers help other languages too</li>
+<li>simplified yet cross platform way to <em>map</em> hybrid objects, specifying via white list one or more nested properties to <code>pack</code> on stringify, and <code>unpack</code> on parse (automated and addressed compression for complex objects)</li>
+</ul><h2>JavaScript And Native JSON Escape Problems</h2>
+
+<p>As <a href="https://twitter.com/garethheyes">@garethheyes</a> pointed out by in <a href="http://www.thespanner.co.uk/2011/07/25/the-json-specification-is-now-wrong/">this post</a>, native <code>JSON.stringify(data)</code> may produce invalid JavaScript.
+Since JSONH aim is <em>not</em> to change native JSON behavior, neither is JSONH a replacement for JSON, all I can suggest is to perform this replacement when and if data could be corrupted:</p>
+
+<pre><code>JSONH.stringify(data).replace(
+    /\u2028|\u2029/g,
+    function (m) {
+        return "\\u202" + (m === "\u2028" ? "8" : "9");
+    })
+</code></pre>
+
+<p>This will ensure proper escape for those characters plus performances will be still better thanks to reduced string output size (compared with the euivalent operation performed by <code>JSON.stringify(data)</code>).</p>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/WebReflection" class="avatar"><img src="https://secure.gravatar.com/avatar/799a8a6502aff3268519382ea2837d4b?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/WebReflection">WebReflection</a> maintains <a href="https://github.com/WebReflection/JSONH">Jsonh</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/WebReflection/JSONH/tarball/master" class="tar">tar</a><a href="https://github.com/WebReflection/JSONH/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
