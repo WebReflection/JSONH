@@ -34,6 +34,7 @@ module JSONH
   end
 
   def pack(hlist)
+    return [] if hlist.empty?
     keys = hlist.first.keys
     [keys.size, *keys, *hlist.map(&:values).flatten(1)]
   end
