@@ -44,7 +44,7 @@ class JSONH {
         /*int /*use type hint if you can removing initial comment*/
         $options = 0
     ) {
-        return self::unpack(json_decode($hlist), $assoc, $depth, $options);
+        return self::unpack(json_decode($hlist, $assoc), $assoc, $depth, $options);
     }
     
     public static function stringify(
