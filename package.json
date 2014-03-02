@@ -1,6 +1,9 @@
 {
   "name": "jsonh",
   "version": "0.0.3",
-  "main":"./js/jsonh.js"
+  "main":"./js/jsonh.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/WebReflection/JSONH.git"
+  }
 }
-
