@@ -81,6 +81,42 @@ wru.test([
                 original
             );
         }
+    }, {
+        name: "un/packing with Arrays of Array",
+        test: function () {
+            var
+                test = [
+                    [
+                        {x: 1, y: 2},
+                        {x: 3, y: 4}
+                    ],
+                    [
+                        {a: 1, b: 2},
+                        {a: 3, b: 4}
+                    ]
+                ],
+                original = JSON.stringify(test),
+                packed
+            ;
+            assert("successfully stringified",
+                (packed = JSON.stringify(test, function (key, value) {
+                    if (key !== '' && value instanceof Array) {
+                        value = jsonh.pack(value);
+                    }
+                    return value;
+                }, null)) ===
+                '[[2,"x","y",1,2,3,4],[2,"a","b",1,2,3,4]]'
+            );
+            assert("successfully parsed",
+                JSON.stringify(JSON.parse(packed, function (key, value) {
+                    if (key !== '' && value instanceof Array) {
+                        value = jsonh.unpack(value);
+                    }
+                    return value;
+                })) ===
+                original
+            );
+        }
     }
 ]);
 
