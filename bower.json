@@ -1,0 +1,24 @@
+{
+  "name": "JSONH",
+  "version": "0.0.4",
+  "homepage": "https://github.com/WebReflection/JSONH",
+  "authors": [
+    "Andrea Giammarchi",
+    "@WebReflection"
+  ],
+  "description": "JSON Homogeneous Collections Compressor",
+  "main": "./js/jsonh.js",
+  "keywords": [
+    "json",
+    "jsonh",
+    "compressing"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
