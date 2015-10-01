@@ -95,4 +95,4 @@ Since JSONH aim is *not* to change native JSON behavior, neither is JSONH a repl
             return "\\u202" + (m === "\u2028" ? "8" : "9");
         })
 
-This will ensure proper escape for those characters plus performances will be still better thanks to reduced string output size (compared with the euivalent operation performed by `JSON.stringify(data)`).
+This will ensure proper escape for those characters plus performances will be still better thanks to reduced string output size (compared with the equivalent operation performed by `JSON.stringify(data)`).
