@@ -1,4 +1,4 @@
-[JSONH](http://webreflection.blogspot.com/2011/08/last-version-of-json-hpack.html) - JSON Homogeneous Collections Compressor
+[JSONH](http://webreflection.blogspot.com/2011/08/last-version-of-json-hpack.html) - JSON Homogeneous Collections Compressor [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/WebReflection/donate)
 ============================================================================================================================
 
 What is JSONH
